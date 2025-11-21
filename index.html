@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aplikasi Input Data Guru</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background:#f5f5f5; }
+    h1 { text-align:center; }
+    h2 { margin-top:30px; color:#333; }
+    .container { max-width:900px; margin:auto; background:white; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    label { font-weight:bold; display:block; margin-top:10px; }
+    input, select { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
+    button { margin-top:15px; padding:10px 15px; border:none; background:#007bff; color:white; border-radius:5px; cursor:pointer; }
+    table { width:100%; margin-top:20px; border-collapse:collapse; }
+    th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+    th { background:#007bff; color:white; }
+    .section { border:1px solid #ddd; padding:15px; border-radius:10px; margin-top:20px; background:#fafafa; }
+  </style>
+</head>Sekolah
+<body>
+
+<!-- COVER LOGIN -->
+<div id="loginScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#003366; display:flex; justify-content:center; align-items:center; flex-direction:column; color:white; z-index:9999;">
+
+  <div style="display:flex; gap:20px; align-items:center; margin-bottom:15px;">
+    <img src="/mnt/data/Copy of tut wuri warna.jpg" alt="Logo" style="width:120px;">
+    <img src="/mnt/data/placeholder_paud_logo.png" alt="Logo PAUD" style="width:120px; border-radius:10px; border:2px solid white;">
+  </div>
+  <h1 style="margin-bottom:20px;">LOGIN APLIKASI DATA GURU</h1>
+
+  <div style="background:white; color:black; padding:20px; border-radius:10px; width:300px; box-shadow:0 0 10px rgba(0,0,0,0.4);">
+    <label>Username (Nama Kecamatan)</label>
+    <input type="text" id="loginUser" style="width:100%; padding:8px; margin-bottom:15px;">
+
+    <label>Pilih Kecamatan</label>
+    <select id="loginUser" style="width:100%; padding:8px; margin-bottom:15px;" onchange="loadSchools()">
+      <option value="">-- pilih kecamatan --</option>
+      <option value="Kec. Bahodopi">Kec. Bahodopi</option>
+      <option value="Kec. Bungku Pesisir">Kec. Bungku Pesisir</option>
+      <option value="Kec. Bumi Raya">Kec. Bumi Raya</option>
+      <option value="Kec. Bungku Barat">Kec. Bungku Barat</option>
+    </select>
+
+    <label>Pilih Sekolah</label>
+    <select id="schoolSelect" style="width:100%; padding:8px; margin-bottom:15px;"></select>
+
+    <label>Password (NPSN)</label>
+    <input type="password" id="loginPass" style="width:100%; padding:8px; margin-bottom:20px;">
+
+    <button onclick="loginApp()" style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">LOGIN</button>
+  
+<script>
+const allowedLogin = {
+  "Kec. Bahodopi": {
+    "SD 1 Bahodopi": "69990222",
+    "SD 2 Bahodopi": "40206549",
+    "SD 3 Bahodopi": "70014844"
+  },
+  "Kec. Bungku Pesisir": {
+    "SD Bungku Pesisir 1": "69887275",
+    "SD Bungku Pesisir 2": "69920396"
+  },
+  "Kec. Bumi Raya": {
+    "SD Bumi Raya 1": "69922437",
+    "SD Bumi Raya 2": "69922446"
+  },
+  "Kec. Bungku Barat": {
+    "SD Bungku Barat 1": "69920394",
+    "SD Bungku Barat 2": "69880844"
+  }
+};
+
+function loadSchools(){
+  const kec = document.getElementById('loginUser').value;
+  const schoolSelect = document.getElementById('schoolSelect');
+  schoolSelect.innerHTML = '';
+
+  if(allowedLogin[kec]){
+    Object.keys(allowedLogin[kec]).forEach(school =>{
+      const opt = document.createElement('option');
+      opt.value = school;
+      opt.textContent = school;
+      schoolSelect.appendChild(opt);
+    });
+  }
+}
+
+function loginApp()()" style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">LOGIN</button>
+  </div>
+</div>
+
+<script>
+const allowedLogin = {
+  "Kec. Bahodopi": ["69990222","40206549","70014844","70026890","40206553","70030552","69880828","70012533","69989793","40205061"],
+  "Kec. Bungku Pesisir": ["69887275","69920396","69962451","69887273","69929159","69923130"],
+  "Kec. Bumi Raya": ["69922437","69922446","69988915","69922457","40204925","69922427"],
+  "Kec. Bungku Barat": ["69920394","69880844","40205867","69984177","69920391","40205861","69923104","69920585","69880847","69880836"]
+};
+
+function loginApp(){
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+
+  if(user !== '' && pass !== ''){
+    document.getElementById('loginScreen').style.display = 'none';
+  } else {
+    alert('Username dan password wajib diisi!');
+  }
+}
+</script>
+
+
+  <div class="container">
+    <h1>Aplikasi Input Data Guru</h1>
+
+    <!-- BAGIAN 1: DATA PRIBADI -->
+    <div class="section">
+      <h2>1. Data Pribadi</h2>
+      <label>Nama Lengkap</label>
+      <input type="text" id="nama" required />
+
+      <label>NIK</label>
+      <input type="text" id="nik" required />
+
+      <label>Tempat Lahir</label>
+      <input type="text" id="tempatlahir" required />
+
+      <label>Tanggal Lahir</label>
+      <input type="date" id="tanggallahir" required />
+    </div>
+
+    <!-- BAGIAN 2: DATA KEPEGAWAIAN -->
+    <div class="section">
+      <h2>2. Data Kepegawaian Guru</h2>
+
+      <label>NUPTK</label>
+      <input type="text" id="nuptk" />
+
+      <label>Jabatan</label>
+      <select id="jabatan" required>
+        <option value="">-- pilih --</option>
+        <option>Kepala Sekolah</option>
+        <option>Guru</option>
+      </select>
+
+      <label>Status Kepegawaian</label>
+      <select id="status" required>
+        <option value="">-- pilih --</option>
+        <option>PNS</option>
+        <option>PPPK</option>
+        <option>PPK Paruh Waktu</option>
+        <option>Kontrak Daerah</option>
+        <option>Honor Desa</option>
+        <option>Honor Sekolah</option>
+        <option>Honor Yayasan</option>
+      </select>
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+      <button id="saveBtn" style="width:200px; font-size:16px;">Simpan Data</button>
+    </div>
+
+    <!-- TABEL DATA -->
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>NIK</th>
+          <th>TTL</th>
+          <th>NUPTK</th>
+          <th>Jabatan</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+<script>
+  const tbody = document.querySelector('#dataTable tbody');
+  let dataGuru = JSON.parse(localStorage.getItem('dataGuru')) || [];
+  let editIndex = null;
+
+  function renderTable() {
+    tbody.innerHTML = '';
+    dataGuru.forEach((guru, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${guru.nama}</td>
+        <td>${guru.nik}</td>
+        <td>${guru.tempatlahir}, ${guru.tanggallahir}</td>
+        <td>${guru.nuptk}</td>
+        <td>${guru.jabatan}</td>
+        <td>${guru.status}</td>
+        <td>
+          <button onclick="editData(${index})">Edit</button>
+          <button onclick="hapusData(${index})">Hapus</button>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  document.getElementById('saveBtn').addEventListener('click', function(){
+    const guruBaru = {
+      nama: document.getElementById('nama').value,
+      nik: document.getElementById('nik').value,
+      tempatlahir: document.getElementById('tempatlahir').value,
+      tanggallahir: document.getElementById('tanggallahir').value,
+      nuptk: document.getElementById('nuptk').value,
+      jabatan: document.getElementById('jabatan').value,
+      status: document.getElementById('status').value,
+    };
+
+    if(editIndex !== null) {
+      dataGuru[editIndex] = guruBaru;
+      editIndex = null;
+    } else {
+      dataGuru.push(guruBaru);
+    }
+
+    localStorage.setItem('dataGuru', JSON.stringify(dataGuru));
+    renderTable();
+
+    document.querySelectorAll('input, select').forEach(el => el.value = "");
+  });
+
+  function editData(index) {
+    const g = dataGuru[index];
+    document.getElementById('nama').value = g.nama;
+    document.getElementById('nik').value = g.nik;
+    document.getElementById('tempatlahir').value = g.tempatlahir;
+    document.getElementById('tanggallahir').value = g.tanggallahir;
+    document.getElementById('nuptk').value = g.nuptk;
+    document.getElementById('jabatan').value = g.jabatan;
+    document.getElementById('status').value = g.status;
+    editIndex = index;
+  }
+
+  function hapusData(index) {
+    if(confirm('Hapus data ini?')){
+      dataGuru.splice(index, 1);
+      localStorage.setItem('dataGuru', JSON.stringify(dataGuru));
+      renderTable();
+    }
+  }
+
+  renderTable();
+</script>
+</body>
+</html>
